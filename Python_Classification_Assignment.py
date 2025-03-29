@@ -95,7 +95,7 @@ def Report():
     nb = joblib.load("nb_model.joblib")
     Classification_report(nb, x_test, y_test)
 
-    show_confusion_matrix([svm,nb],x_test,y_test,["SVM","NB"])
+    show_confusion_matrix([svm,nb],x_test,y_test,["SVC","NB"])
 # Visualize 
 def show_confusion_matrix(models, x_test, y_test, labels):
     fig, axis = plt.subplots(1, len(models), figsize=(10*len(models),5))
