@@ -40,8 +40,8 @@ def Data_Prep():
     scaler = StandardScaler()
     x_scaled = scaler.fit_transform(x)
 
-    # split  data into training dataset and testing dataset 
-    x_train,x_test,y_train,y_test = train_test_split(x_scaled, y, test_size=0.2, random_state=42)
+    # split  data into training dataset and testing dataset  test_size=0.5 meaning 50% of data goes to testing due to dataset being 200 entries 
+    x_train,x_test,y_train,y_test = train_test_split(x_scaled, y, test_size=0.5, random_state=42)
     
     return x_train, x_test, y_train , y_test
 # Train Support Vector Machine
@@ -63,10 +63,18 @@ def NB_train(x_train,y_train):
 
 # Print Report
 def Classification_report(model,x_test,y_test):
+
+    
     # make predictions based on the trained model
     y_pred = model.predict(x_test)
+
+    print(f"Test labels count: {len(y_test)}")
+    print(f"Predictions count: {len(y_pred)}")
+    print("Unique classes in test set:", set(y_test))
+    print("Unique classes in predictions:", set(y_pred))
     # calculate accuracy
     acc = accuracy_score(y_test, y_pred)
+
     # calculate precission
     precision = precision_score(y_test, y_pred,average="macro")
     print("\n--- Classification Report ---")
